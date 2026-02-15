@@ -1,0 +1,2 @@
+-keep class com.google.android.tts.** { *; }
+-keep class android.speech.tts.** { *; }

@@ -3,6 +3,7 @@ import 'package:project_v1/constants.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:animated_widgets/animated_widgets.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:project_v1/services/tts_helper.dart';
 
 class CustomCardModel {
   String title, image, voice;
@@ -24,7 +25,27 @@ class ModelStyle extends StatefulWidget {
 class _ModelStyleState extends State<ModelStyle> {
   final FlutterTts flutterTts = FlutterTts();
   bool flag = false;
-  final player = AudioCache();
+  final player = AudioPlayer();
+
+  @override
+  void initState() {
+    super.initState();
+    Future<void>(() async {
+      await TtsHelper.configureArabic(
+        flutterTts,
+        pitch: 1.0,
+        volume: 1.0,
+        speechRate: 0.45,
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    flutterTts.stop();
+    player.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,12 +83,10 @@ class _ModelStyleState extends State<ModelStyle> {
                         borderRadius: BorderRadius.circular(15.0),
                       ),
                       child: InkWell(
-                        onTap: () {
+                        onTap: () async {
                           // Music().volDown();
-                          flutterTts.setLanguage("ar-EG");
-                          flutterTts.stop();
-                          flutterTts.speak(widget.cardModel.title);
-                          flutterTts.setPitch(1);
+                          await TtsHelper.speak(
+                              flutterTts, widget.cardModel.title);
                           setState(() => flag = true);
 
                           Future.delayed(Duration(milliseconds: 650), () {
@@ -111,7 +130,7 @@ class _ModelStyleState extends State<ModelStyle> {
                           ),
                           InkWell(
                             onTap: () {
-                              player.play(this.widget.cardModel.voice);
+                              player.play(AssetSource(widget.cardModel.voice));
                             },
                             child: Container(
                               height: 65,

@@ -90,61 +90,75 @@ class PrimaryText extends StatelessWidget {
 //CATEGORIES
 const CardsList = [
   {
-    'imagePath': 'assets/nums.png',
-    'name': 'الأرقام',
+    'imagePath': 'assets/images/ecole_cognitive.png',
+    'name': 'المدرسة',
   },
   {
-    'imagePath': 'assets/letters.png',
-    'name': ' الحروف',
+    'imagePath': 'assets/images/biblio_linguistique.png',
+    'name': 'المكتبة',
   },
   {
-    'imagePath': 'assets/animals.png',
-    'name': 'الحيوانات',
+    'imagePath': 'assets/images/parc_moteur.png',
+    'name': 'الحديقة',
   },
   {
-    'imagePath': 'assets/family.png',
-    'name': 'العائلة',
-  },
-  {
-    'imagePath': 'assets/fruits.png',
-    'name': 'الفواكه',
-  },
-  {
-    'imagePath': 'assets/vegetables.png',
-    'name': 'الخضراوات',
+    'imagePath': 'assets/images/maison_sociale.png',
+    'name': 'البيت',
   },
 ];
 
-//ROUTES
+//ROUTES (Home categories)
 const routesList = [
-  {
-    'routePath': '/Nums',
-  },
-  {
-    'routePath': '/Letters',
-  },
-  {
-    'routePath': '/Animals',
-  },
-  {
-    'routePath': '/Family',
-  },
-  {
-    'routePath': '/Fruits',
-  },
-  {
-    'routePath': '/Vegetables',
-  },
+  {'routePath': '/CognitiveGames'},
+  {'routePath': '/LinguisticGames'},
+  {'routePath': '/MotorGames'},
+  {'routePath': '/SocialGames'},
 ];
 
 const GamesList = [
   {'GameName': 'وصلة', 'imagePath': 'assets/games/color.png'},
   {'GameName': 'ميمو', 'imagePath': 'assets/games/memo.png'},
+  {'GameName': 'الأرقام', 'imagePath': 'assets/games/logonumbers.png'},
+  {'GameName': 'الحروف', 'imagePath': 'assets/games/gameletters.png'},
+  {'GameName': 'العائلة', 'imagePath': 'assets/games/familygame.png'},
+  {'GameName': 'الفواكه والخضروات', 'imagePath': 'assets/games/FruitsVegetablesGame.png'},
+  {'GameName': 'ركّب الصورة', 'imagePath': 'assets/games/puzzlesgame.png'},
 ];
 
 const gamesRoutes = [
   {'routePath': '/Color'},
   {'routePath': '/Memory'},
+  {'routePath': '/NumbersGame'},
+  {'routePath': '/LettersQuizGame'},
+  {'routePath': '/FamilyGame'},
+  {'routePath': '/FruitsVegetablesGame'},
+  {'routePath': '/PuzzlesGame'},
+];
+
+// Category game lists
+const cognitiveGames = [
+  {'title': 'الألوان', 'imagePath': 'assets/games/color.png', 'route': '/Color'},
+  {'title': 'ميمو', 'imagePath': 'assets/games/memo.png', 'route': '/Memory'},
+  {'title': 'الأرقام', 'imagePath': 'assets/games/logonumbers.png', 'route': '/NumbersGame'},
+  {'title': 'الفواكه والخضروات', 'imagePath': 'assets/games/FruitsVegetablesGame.png', 'route': '/FruitsVegetablesGame'},
+  {'title': 'أيهما أكبر؟', 'imagePath': 'assets/games/compare.png', 'route': '/CompareGame'},
+];
+
+const linguisticGames = [
+  {'title': 'الحروف', 'imagePath': 'assets/games/gameletters.png', 'route': '/LettersQuizGame'},
+  {'title': 'اسمع وسمّي', 'imagePath': 'assets/games/listen.png', 'route': '/ListenNameGame'},
+  {'title': 'ركّب الكلمة', 'imagePath': 'assets/games/LettersQuizGame.png', 'route': '/WordBuildGame'},
+];
+
+const motorGames = [
+  {'title': 'ركّب الصورة', 'imagePath': 'assets/games/puzzlesgame.png', 'route': '/PuzzlesGame'},
+  {'title': 'اتبع الخط', 'imagePath': 'assets/games/tracing.png', 'route': '/TracingGame'},
+  {'title': 'اضغط على الهدف', 'imagePath': 'assets/games/target_star.png', 'route': '/TapTargetGame'},
+];
+
+const socialGames = [
+  {'title': 'العائلة', 'imagePath': 'assets/games/familygame.png', 'route': '/FamilyGame'},
+  {'title': 'كيف أشعر؟', 'imagePath': 'assets/games/emotions.png', 'route': '/EmotionGame'},
 ];
 
 //NUMS LIST

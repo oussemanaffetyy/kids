@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.3 <3.0.0"
+  sdk: ">=2.17.3 <4.0.0"
 
 dependencies:
   flutter:
@@ -29,13 +29,18 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  google_fonts: ^2.1.0
-  flutter_svg: ^1.0.3
-  flutter_tts: ^3.2.2
+  google_fonts: ^4.0.0
+  flutter_svg: ^2.0.0
+  flutter_tts: ^3.8.0
   animated_widgets: ^1.1.0
-  audioplayers: ^0.20.1
-  vibration: ^1.7.4-nullsafety.0
+  audioplayers: ^5.0.0
+  vibration: ^2.0.0
   platform: ^3.1.0
+  win32: ^5.4.0
+  lottie: ^2.7.0
+  shared_preferences: ^2.3.2
+  excel: ^2.1.0
+  path_provider: ^2.1.4
 
 
 
@@ -43,7 +48,10 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: ^0.9.2
+
+dependency_overrides:
+  archive:
+    path: third_party/archive
   
 flutter_icons:
   image_path: "icons/logo.png"
@@ -63,19 +71,76 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-  - assets/
-  - assets/images/
-  - assets/numbers/
-  - assets/counters/
-  - assets/animals/
-  - assets/voices/
-  - assets/letters/
-  - assets/letters/avatars/
-  - assets/family/
-  - assets/games/memo/
-  - assets/games/
-  - assets/vegetables/
-  - assets/fruits/
+    - assets/
+    - assets/images/
+    - assets/numbers/
+    - assets/counters/
+    - assets/animals/
+    - assets/voices/
+    - assets/voices/tts/
+    - assets/letters/
+    - assets/letters/avatars/
+    - assets/letters/samples/
+    - assets/family/
+    - assets/games/memo/
+    - assets/games/
+    - assets/games/VegetablesetFruits/
+    - assets/games/VegetablesetFruits/Fruits/
+    - assets/games/VegetablesetFruits/Vegetables/
+    - assets/games/puzzles/
+    - assets/games/puzzles/1/
+    - assets/games/puzzles/2/
+    - assets/games/puzzles/3/
+    - assets/games/puzzles/4/
+    - assets/games/puzzles/5/
+    - assets/games/puzzles/6/
+    - assets/games/puzzles/7/
+    - assets/games/puzzles/8/
+    - assets/games/puzzles/9/
+    - assets/games/puzzles/10/
+    - assets/games/puzzles/11/
+    - assets/games/puzzles/1/level_1_2x2/
+    - assets/games/puzzles/1/level_2_3x3/
+    - assets/games/puzzles/1/level_3_4x4/
+    - assets/games/puzzles/2/level_1_2x2/
+    - assets/games/puzzles/2/level_2_3x3/
+    - assets/games/puzzles/2/level_3_4x4/
+    - assets/games/puzzles/3/level_1_2x2/
+    - assets/games/puzzles/3/level_2_3x3/
+    - assets/games/puzzles/3/level_3_4x4/
+    - assets/games/puzzles/4/level_1_2x2/
+    - assets/games/puzzles/4/level_2_3x3/
+    - assets/games/puzzles/4/level_3_4x4/
+    - assets/games/puzzles/5/level_1_2x2/
+    - assets/games/puzzles/5/level_2_3x3/
+    - assets/games/puzzles/5/level_3_4x4/
+    - assets/games/puzzles/6/level_1_2x2/
+    - assets/games/puzzles/6/level_2_3x3/
+    - assets/games/puzzles/6/level_3_4x4/
+    - assets/games/puzzles/7/level_1_2x2/
+    - assets/games/puzzles/7/level_2_3x3/
+    - assets/games/puzzles/7/level_3_4x4/
+    - assets/games/puzzles/8/level_1_2x2/
+    - assets/games/puzzles/8/level_2_3x3/
+    - assets/games/puzzles/8/level_3_4x4/
+    - assets/games/puzzles/9/level_1_2x2/
+    - assets/games/puzzles/9/level_2_3x3/
+    - assets/games/puzzles/9/level_3_4x4/
+    - assets/games/puzzles/10/level_1_2x2/
+    - assets/games/puzzles/10/level_2_3x3/
+    - assets/games/puzzles/10/level_3_4x4/
+    - assets/games/puzzles/11/level_1_2x2/
+    - assets/games/puzzles/11/level_2_3x3/
+    - assets/games/puzzles/11/level_3_4x4/
+    - assets/vegetables/
+    - assets/fruits/
+    - assets/json/
+    - assets/cognitive/
+    - assets/gamenumbers/
+    - assets/gamenumbers/objects/
+    - assets/gamenumbers/numbers/
+    - assets/couleurs/
+    - assets/emotions/
 
 
 

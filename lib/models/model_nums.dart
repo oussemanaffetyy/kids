@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:project_v1/constants.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:animated_widgets/animated_widgets.dart';
+import 'package:project_v1/services/tts_helper.dart';
 
 class CustomCardModel {
   String title, subImage, image;
+  final Color? color;
   CustomCardModel({
     required this.title,
     required this.subImage,
     required this.image,
+    this.color,
   });
 }
 
@@ -25,13 +28,41 @@ class _ModelStyleState extends State<ModelStyle> {
   bool flag = false;
 
   @override
+  void initState() {
+    super.initState();
+    Future<void>(() async {
+      await TtsHelper.configureArabic(
+        flutterTts,
+        pitch: 1.0,
+        volume: 1.0,
+        speechRate: 0.45,
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    flutterTts.stop();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final isRtl = true;
+    const bgTop = 30.0;
+    const bgHeight = 180.0;
+    const imageWidth = 135.0;
+    const imageHeight = 160.0;
+    final bgWidth = ScreenSize(context).width * 0.9;
+    final bgColor = widget.cardModel.color ?? AppColors.crimson;
     return Container(
       height: 230,
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.only(left: 20, right: 10),
+            margin: isRtl
+                ? EdgeInsets.only(left: 10, right: 20)
+                : EdgeInsets.only(left: 20, right: 10),
             height: 230,
             child: Stack(
               children: [
@@ -39,87 +70,98 @@ class _ModelStyleState extends State<ModelStyle> {
                   top: 30,
                   child: Container(
                     height: 180,
-                    width: ScreenSize(context).width * 0.9,
+                    width: bgWidth,
                     decoration: BoxDecoration(
-                      color: AppColors.crimson,
+                      color: bgColor,
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),
                 Positioned(
-                  top: 2,
-                  left: 10,
-                  child: ShakeAnimatedWidget(
-                    enabled: flag,
-                    duration: Duration(milliseconds: 150),
-                    shakeAngle: Rotation.deg(z: 10),
-                    curve: Curves.linear,
-                    child: Card(
-                      color: AppColors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      child: InkWell(
-                        onTap: () {
-                          //Music().volDown();
-                          flutterTts.setLanguage("ar-EG");
-                          flutterTts.speak(widget.cardModel.title);
-                          flutterTts.setPitch(1);
-                          setState(() => flag = true);
-
-                          Future.delayed(Duration(milliseconds: 650), () {
-                            setState(() => flag = false);
-                          });
-
-                          // Future.delayed(Duration(milliseconds: 900), () {
-                          //   Music().volUp();
-                          // });
-                        },
-                        child: Container(
-                          height: 175,
-                          width: 135,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: AppColors.white.withOpacity(0.3),
-                                  spreadRadius: 2.5,
-                                  blurRadius: 4,
-                                  offset: Offset(0.5, 1.5))
-                            ],
-                            image: DecorationImage(
-                                image: AssetImage(this.widget.cardModel.image),
-                                fit: BoxFit.fill),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 55,
-                  left: 200,
-                  child: Container(
-                    height: 125,
-                    width: 160,
-                    child: Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  top: bgTop,
+                  child: SizedBox(
+                    height: bgHeight,
+                    width: bgWidth,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 14),
+                      child: Row(
+                        textDirection:
+                            isRtl ? TextDirection.rtl : TextDirection.ltr,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          PrimaryText(
-                            text: this.widget.cardModel.title,
-                            color: AppColors.black,
-                            fontWeight: FontWeight.bold,
-                            size: 35,
+                          ShakeAnimatedWidget(
+                            enabled: flag,
+                            duration: Duration(milliseconds: 150),
+                            shakeAngle: Rotation.deg(z: 10),
+                            curve: Curves.linear,
+                            child: Card(
+                              color: AppColors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: InkWell(
+                                onTap: () async {
+                                  //Music().volDown();
+                                  await TtsHelper.speak(
+                                      flutterTts, widget.cardModel.title);
+                                  setState(() => flag = true);
+
+                                  Future.delayed(Duration(milliseconds: 650),
+                                      () {
+                                    setState(() => flag = false);
+                                  });
+
+                                  // Future.delayed(Duration(milliseconds: 900), () {
+                                  //   Music().volUp();
+                                  // });
+                                },
+                                child: Container(
+                                  height: imageHeight,
+                                  width: imageWidth,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color:
+                                              AppColors.white.withOpacity(0.3),
+                                          spreadRadius: 2.5,
+                                          blurRadius: 4,
+                                          offset: Offset(0.5, 1.5))
+                                    ],
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            this.widget.cardModel.image),
+                                        fit: BoxFit.fill),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
-                          Container(
-                            height: 65,
-                            width: 65,
-                            child: Image(
-                                image:
-                                    AssetImage(this.widget.cardModel.subImage),
-                                fit: BoxFit.contain),
+                          const SizedBox(width: 14),
+                          Expanded(
+                            child: Directionality(
+                              textDirection: TextDirection.rtl,
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  PrimaryText(
+                                    text: this.widget.cardModel.title,
+                                    color: AppColors.black,
+                                    fontWeight: FontWeight.bold,
+                                    size: 35,
+                                  ),
+                                  Container(
+                                    height: 65,
+                                    width: 65,
+                                    child: Image(
+                                        image: AssetImage(
+                                            this.widget.cardModel.subImage),
+                                        fit: BoxFit.contain),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ],
                       ),

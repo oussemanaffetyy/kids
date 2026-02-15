@@ -15,12 +15,7 @@ class _GameScreenState extends State<GameScreen> {
         elevation: 0,
         centerTitle: true,
         backgroundColor: AppColors.black,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back, color: AppColors.backGround),
-        ),
+        automaticallyImplyLeading: false,
         title:
             Image.asset('assets/images/Logo_color.png', width: 65, height: 65),
       ),

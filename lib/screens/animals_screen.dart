@@ -10,23 +10,26 @@ class AnimalScreen extends StatefulWidget {
 class _AnimalScreenState extends State<AnimalScreen> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final isTablet = size.width >= 600;
+    final backgroundPath = isTablet
+        ? 'assets/images/2048x2732.png'
+        : 'assets/images/1080x2400.png';
+
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
-        backgroundColor: AppColors.black,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back, color: AppColors.backGround),
-        ),
-        title:
-            Image.asset('assets/images/Logo_color.png', width: 65, height: 65),
-      ),
-      backgroundColor: AppColors.black,
-      body: Center(
-        child: buildModels(),
+      backgroundColor: Colors.transparent,
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              backgroundPath,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Center(
+            child: buildModels(),
+          ),
+        ],
       ),
     );
   }

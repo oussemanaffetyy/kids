@@ -9,23 +9,26 @@ class Fruits extends StatefulWidget {
 
 class _FruitsState extends State<Fruits> {
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final isTablet = size.width >= 600;
+    final backgroundPath = isTablet
+        ? 'assets/images/bgtablet.png'
+        : 'assets/images/bgphone.png';
+
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
-        backgroundColor: AppColors.black,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back, color: AppColors.backGround),
-        ),
-        title:
-            Image.asset('assets/images/Logo_color.png', width: 65, height: 65),
-      ),
-      backgroundColor: AppColors.black,
-      body: Center(
-        child: buildModels(),
+      backgroundColor: Colors.transparent,
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              backgroundPath,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Center(
+            child: buildModels(),
+          ),
+        ],
       ),
     );
   }
@@ -34,10 +37,13 @@ class _FruitsState extends State<Fruits> {
     return ListView.builder(
       itemCount: fruitsList.length,
       itemBuilder: (context, index) {
+        final Object? colorValue = fruitsList[index]['color'];
+        final Color? color = colorValue is Color ? colorValue : null;
         return ModelStyle(
           cardModel: new CustomCardModel(
               title: fruitsList[index]['name'].toString(),
-              image: fruitsList[index]['imagePath'].toString()),
+              image: fruitsList[index]['imagePath'].toString(),
+              color: color),
         );
       },
     );
